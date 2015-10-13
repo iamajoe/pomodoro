@@ -1,6 +1,8 @@
 # Pomodoro
 A simple pomodoro technique module with CLI.
 
+![Screenshot](/screen.png)
+
 ### Installation
 ```bash
 npm install --save git+ssh://git@github.com:Sendoushi/pomodoro.git # for node

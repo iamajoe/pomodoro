@@ -91,7 +91,14 @@ return {
         // Done here because progress doesn't have an update method for total
         // TODO: Update method for total
         var percentStr = '\033[1m:percent\033[0m';
-        var remainingStr = 'Remaining: \033[1m' + remaining + 's\033[0m';
+        var remainingStr = 'Remaining: \033[1m';
+
+        if (remaining < 60) {
+            remainingStr += remaining + 's\033[0m';
+        } else {
+            remainingStr += Math.ceil(remaining / 60) + 'm\033[0m';
+        }
+
         var progress = new ProgressBar(this.moduleLog + ' :bar ' + percentStr + ' \033[33m|\033[0m ' + remainingStr, {
             complete: '\033[42m \033[0m',
             incomplete: '\033[41m \033[0m',
