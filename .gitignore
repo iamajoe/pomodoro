@@ -1,0 +1,12 @@
+/node_modules
+/npm-debug.*
+/components
+/bower_components
+/tmp
+.DS_Store
+*.*swp
+
+/app/config/parameters.json
+/web/dev
+/web/prod
+/web/staging
