@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+var fs = require('fs');
+var path = require('path');
 var exec = require('child_process').exec;
 var ProgressBar = require('progress');
 
@@ -20,11 +22,7 @@ return {
         this.help();
 
         // Initialize pomodoro
-        this.pomodoro = require('../pomodoro').init({
-            remainingChanged: this.remainingChanged.bind(this),
-            log: this.logMessage.bind(this),
-            timerComplete: this.timerComplete.bind(this)
-        });
+        this.pomodoro = require('../lib/pomodoro').init(this.getConfig());
 
         // Set the timer
         this.pomodoro.setTimer();
@@ -33,6 +31,50 @@ return {
         this.listenKeyboard();
 
         return this;
+    },
+
+    /**
+     * Get config from file or create one
+     *
+     * @return {Object}
+     */
+    getConfig: function () {
+        var configPath = path.resolve('./config-cli.json');
+        var configRead = fs.existsSync(configPath) && fs.readFileSync(configPath, 'utf8');
+        var configKeys;
+        var config = {
+            perDay: 20, // after 20 full pomodoros call a day
+            whenToLongBreak: 10, // after 10 pomodoros
+
+            pomodoroTime: 1800, // 60 minutes in seconds
+            breakTime: 60, // 1 minute in seconds
+            longBreakTime: 900, // 15 minutes in seconds
+        };
+
+        // TODO: Interface should help to change this data
+
+        // Create config if it doesn't exist
+        if (!configRead) {
+            fs.writeFileSync(configPath, JSON.stringify(config, null, 4), {
+                encoding: 'utf8'
+            });
+        } else {
+            configRead = JSON.parse(configRead);
+
+            // Mix the read file with the actual config
+            configKeys = Object.keys(configRead);
+            configKeys.forEach(function (key) {
+                config[key] = configRead[key];
+            }.bind(this));
+
+        }
+
+        // Set the functions
+        config.remainingChanged = this.remainingChanged.bind(this);
+        config.log = this.logMessage.bind(this);
+        config.timerComplete = this.timerComplete.bind(this);
+
+        return config;
     },
 
     /**

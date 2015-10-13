@@ -2,7 +2,7 @@
   "name": "pomodoro",
   "version": "0.0.1",
   "description": "Pomodoro technique module",
-  "main": "pomodoro.js",
+  "main": "lib/pomodoro.js",
   "bin": {
     "pomodoro": "./bin/cli.js"
   },
