@@ -159,7 +159,7 @@ return {
         console.log(this.inMiddleProgress ? '\n' + header : header);
         console.log('       \033[1mH\033[0m       Show help');
         console.log('       \033[1mSpace\033[0m   Start/stop actual timer');
-        console.log('       \033[1mS\033[0m       Skip the actual timer\n');
+        console.log('       \033[1mS\033[0m       Skip the actual timer');
         console.log('       \033[1mQ\033[0m       Quit\n');
     },
 
