@@ -7,7 +7,9 @@
         "setImmediate",
         "clearImmediate",
         "requestAnimationFrame",
-        "cancelAnimationFrame"
+        "cancelAnimationFrame",
+        "module",
+        "JSON"
     ],
 
     "browser": true,
