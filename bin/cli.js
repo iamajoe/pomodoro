@@ -10,7 +10,7 @@ var ProgressBar = require('progress');
     'use strict';
 
     return {
-        moduleLog: '\033[1;31m[Pomodoro]\033[0m',
+        moduleLog: '\u001b[1;31m[Pomodoro]\u001b[0m',
 
         /**
          * Initializes the cli
@@ -92,18 +92,20 @@ var ProgressBar = require('progress');
             // Set the progress bar
             // Done here because progress doesn't have an update method for total
             // TODO: Update method for total
-            var percentStr = '\033[1m:percent\033[0m';
-            var remainingStr = 'Remaining: \033[1m';
+            var loadingBarStr = this.moduleLog + ' :bar ';
+            loadingBarStr += '\u001b[1m:percent\u001b[0m';
+            loadingBarStr += ' \u001b[33m|\u001b[0m ';
+            loadingBarStr += 'Remaining: \u001b[1m';
 
             if (remaining < 60) {
-                remainingStr += remaining + 's\033[0m';
+                loadingBarStr += remaining + 's\u001b[0m';
             } else {
-                remainingStr += Math.ceil(remaining / 60) + 'm\033[0m';
+                loadingBarStr += Math.ceil(remaining / 60) + 'm\u001b[0m';
             }
 
-            var progress = new ProgressBar(this.moduleLog + ' :bar ' + percentStr + ' \033[33m|\033[0m ' + remainingStr, {
-                complete: '\033[42m \033[0m',
-                incomplete: '\033[41m \033[0m',
+            var progress = new ProgressBar(loadingBarStr, {
+                complete: '\u001b[42m \u001b[0m',
+                incomplete: '\u001b[41m \u001b[0m',
                 total: total,
                 renderThrottle: 500,
                 width: 30,
@@ -204,14 +206,14 @@ var ProgressBar = require('progress');
          * Shows help
          */
         help: function () {
-            var header = '\n' + this.moduleLog + '\033[32m Help\033[0m\n';
+            var header = '\n' + this.moduleLog + '\u001b[32m Help\u001b[0m\n';
 
             // TODO: Improve interface
             console.log(this.inMiddleProgress ? '\n' + header : header);
-            console.log('       \033[1mH\033[0m       Show help');
-            console.log('       \033[1mSpace\033[0m   Start/stop actual timer');
-            console.log('       \033[1mS\033[0m       Skip the actual timer');
-            console.log('       \033[1mQ\033[0m       Quit\n');
+            console.log('       \u001b[1mH\u001b[0m       Show help');
+            console.log('       \u001b[1mSpace\u001b[0m   Start/stop actual timer');
+            console.log('       \u001b[1mS\u001b[0m       Skip the actual timer');
+            console.log('       \u001b[1mQ\u001b[0m       Quit\n');
         },
 
         /**
