@@ -41,7 +41,7 @@ var ProgressBar = require('progress');
          * @return {Object}
          */
         getConfig: function () {
-            var configPath = path.resolve('./config-cli.json');
+            var configPath = path.resolve('~/.pomodoro-config.json');
             var configRead = fs.existsSync(configPath) && fs.readFileSync(configPath, 'utf8');
             var configKeys;
             var config = {
