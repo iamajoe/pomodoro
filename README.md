@@ -59,3 +59,5 @@ Or in the cli:
 ```bash
 pomodoro # help will be provided
 ```
+
+To change the configs of the cli tool you may edit the ```.pomodoro-config``` file that is present in your user's folder. The file has all the times in seconds. For now, ```perDay```, ```whenToLongBreak``` and ```longBreakTime``` don't work but soon...
